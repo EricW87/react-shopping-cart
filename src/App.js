@@ -19,13 +19,25 @@ function App() {
 		// add the given item to the cart
 		console.log(cart);
 		console.log(item);
+		if(cart.find(element => element.id === item.id)) //Can't add duplicates :(
+			return;
+
 		setCart([...cart, item]);
+	};
+
+	const removeItem = itemid => {
+		// add the given item to the cart
+		console.log(itemid);
+		let cart_remove = cart.filter(element => element.id !== itemid);
+		console.log(cart);
+		console.log(cart_remove);
+		setCart([...cart_remove]);
 	};
 
 
 	return (
 		<ProductContext.Provider value={{products, addItem}}>
-			<CartContext.Provider value = {cart}>
+			<CartContext.Provider value = {{cart, removeItem}}>
 				<div className="App">
 					<Navigation />
 
